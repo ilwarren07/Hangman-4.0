@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hangman Game</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        .word { font-size: 2em; letter-spacing: 0.2em; }
+        .letters button { margin: 5px; padding: 10px; font-size: 1em; }
+        .hangman { font-size: 1.5em; margin: 20px; }
+    </style>
+</head>
+<body>
+    <h1>Hangman Game</h1>
+    <p class="hangman">Attempts left: <span id="attempts">6</span></p>
+    <p class="word" id="wordDisplay">_ _ _ _ _</p>
+    <div class="letters" id="letters"></div>
+    <p id="message"></p>
+    <script>
+        const words = ["javascript", "hangman", "coding", "programming", "developer"];
+        let chosenWord = words[Math.floor(Math.random() * words.length)].toUpperCase();
+        let guessedWord = Array(chosenWord.length).fill("_");
+        let attempts = 6;
+        document.getElementById("wordDisplay").textContent = guessedWord.join(" ");
+        
+        function createButtons() {
+            let lettersDiv = document.getElementById("letters");
+            lettersDiv.innerHTML = "";
+            "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("").forEach(letter => {
+                let btn = document.createElement("button");
+                btn.textContent = letter;
+                btn.onclick = () => guessLetter(letter, btn);
+                lettersDiv.appendChild(btn);
+            });
+        }
+        
+        function guessLetter(letter, btn) {
+            btn.disabled = true;
+            if (chosenWord.includes(letter)) {
+                chosenWord.split("").forEach((char, index) => {
+                    if (char === letter) guessedWord[index] = letter;
+                });
+                document.getElementById("wordDisplay").textContent = guessedWord.join(" ");
+                if (!guessedWord.includes("_")) {
+                    document.getElementById("message").textContent = "🎉 You Win! 🎉";
+                }
+            } else {
+                attempts--;
+                document.getElementById("attempts").textContent = attempts;
+                if (attempts === 0) {
+                    document.getElementById("message").textContent = "💀 Game Over! The word was " + chosenWord;
+                    document.getElementById("letters").innerHTML = "";
+                }
+            }
+        }
+        createButtons();
+    </script>
+</body>
+</html>
