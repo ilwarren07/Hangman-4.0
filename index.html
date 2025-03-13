@@ -18,7 +18,9 @@
     <div class="letters" id="letters"></div>
     <p id="message"></p>
     <script>
-        const words = ["DicksonStreetBookshop"];
+        const chosenWord = "Dickson Street Bookshop".toUpperCase();  // Updated phrase
+        let displayWord = chosenWord.replace(/[A-Z]/g, "_");         // Replaces only letters with underscores
+        displayWord = displayWord.replace(/ /g, " ");                // Adds spaces in correct positions
         let chosenWord = words[Math.floor(Math.random() * words.length)].toUpperCase();
         let guessedWord = Array(chosenWord.length).fill("_");
         let attempts = 7;
