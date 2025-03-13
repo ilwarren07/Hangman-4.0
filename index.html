@@ -18,10 +18,10 @@
     <div class="letters" id="letters"></div>
     <p id="message"></p>
     <script>
-        const words = ["javascript", "hangman", "coding", "programming", "developer"];
+        const words = ["Dickson Street Bookshop"];
         let chosenWord = words[Math.floor(Math.random() * words.length)].toUpperCase();
         let guessedWord = Array(chosenWord.length).fill("_");
-        let attempts = 6;
+        let attempts = 7;
         document.getElementById("wordDisplay").textContent = guessedWord.join(" ");
         
         function createButtons() {
