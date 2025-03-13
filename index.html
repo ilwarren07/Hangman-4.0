@@ -20,8 +20,7 @@
     
     <script>
         const chosenWord = "Dickson Street Bookshop".toUpperCase();
-        let displayWord = chosenWord.replace(/[A-Z]/g, "_").replace(/ /g, " ");  // Spaces automatically shown
-        let guessedWord = displayWord.split("");  // Tracks guessed letters
+        let guessedWord = chosenWord.split("").map(char => (char === " " ? " " : "_")); // Show spaces automatically
         let attempts = 7;
 
         document.getElementById("wordDisplay").textContent = guessedWord.join(" ");
