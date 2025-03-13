@@ -19,11 +19,11 @@
     <p id="message"></p>
     
     <script>
-        const chosenWord = "Dickson Street Bookshop".toUpperCase();
-        let guessedWord = chosenWord.split("").map(char => (char === " " ? " " : "_")); // Show spaces automatically
+        const chosenWord = "DICKSON STREET BOOKSHOP".toUpperCase();
+        let guessedWord = chosenWord.split("").map(char => (char === " " ? "\u00A0\u00A0" : "_")); // Add non-breaking spaces
         let attempts = 7;
 
-        document.getElementById("wordDisplay").textContent = guessedWord.join(" ");
+        document.getElementById("wordDisplay").innerHTML = guessedWord.join(" ");
 
         function createButtons() {
             let lettersDiv = document.getElementById("letters");
@@ -44,7 +44,7 @@
                     if (char === letter) guessedWord[index] = letter;
                 });
 
-                document.getElementById("wordDisplay").textContent = guessedWord.join(" ");
+                document.getElementById("wordDisplay").innerHTML = guessedWord.join(" ");
 
                 if (!guessedWord.includes("_")) {
                     document.getElementById("message").textContent = "🎉 You Win! 🎉";
